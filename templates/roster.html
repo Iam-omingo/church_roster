@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duty Roster</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>4-Month Duty Roster</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Week</th>
+                    <th>Pulpit (Gents)</th>
+                    <th>Pulpit (Ladies)</th>
+                    <th>Envelope Collection (Deacon)</th>
+                    <th>Envelope Collection (Deaconess)</th>
+                    <th>Welcoming (Deacon)</th>
+                    <th>Welcoming (Deaconess)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for week in roster %}
+                    <tr>
+                        <td>Week {{ week.week }}</td>
+                        <td>
+                            {% for member in week.pulpit_gents %}
+                                {{ member.name }} <br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for member in week.pulpit_ladies %}
+                                {{ member.name }} <br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {{ week.envelope_deacon }} <br>
+                        </td>
+                        <td>
+                            {{ week.envelope_deaconess }} <br>
+                        </td>
+                        <td>
+                            {{ week.welcoming_deacon }} <br>
+                        </td>
+                        <td>
+                            {{ week.welcoming_deaconess }} <br>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+</body>
+</html>

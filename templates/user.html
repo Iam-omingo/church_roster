@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>User Page</h2>
+        {% if rosters %}
+            {% for month, roster in rosters.items() %}
+                <h3>{{ month }} Duty Roster</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Pulpit (Gents)</th>
+                            <th>Pulpit (Ladies)</th>
+                            <th>Envelope Collection (Deacon)</th>
+                            <th>Envelope Collection (Deaconess)</th>
+                            <th>Welcoming (Deacon)</th>
+                            <th>Welcoming (Deaconess)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for week in roster %}
+                            <tr>
+                                <td>Week {{ week.week }}</td>
+                                <td>{{ week.pulpit_gents }}</td>
+                                <td>{{ week.pulpit_ladies }}</td>
+                                <td>{{ week.envelope_deacon }}</td>
+                                <td>{{ week.envelope_deaconess }}</td>
+                                <td>{{ week.welcoming_deacon }}</td>
+                                <td>{{ week.welcoming_deaconess }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+        {% else %}
+            <p>No data available.</p>
+        {% endif %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+</body>
+</html>
